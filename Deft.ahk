@@ -14,7 +14,10 @@ _positionTopRight := 7
 _positionBottomRight := 8
 _positionBottomLeft := 9
 _positionCount := 9
-_padding := 8
+_paddingLeft := -8
+_paddingTop := 0
+_paddingRight := -8
+_paddingBottom := -8
 _undoId := ""
 _undoPositions := ""
 

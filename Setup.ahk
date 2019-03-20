@@ -170,147 +170,137 @@ GetAdjacentPosition(relationToCurrent) {
 }
 
 CreateHomePosition(monitor) {
-    global _padding
-
     fullWidth := GetWidth(monitor)
     fullHeight := GetHeight(monitor)
-        
     width := Floor(fullWidth * .9)
     height := Floor(fullHeight * .9)
-
     left := Floor(GetLeft(monitor) + (fullWidth * .05))
     top := Floor(GetTop(monitor) + (fullHeight * .05))
-
     position = %left%,%top%,%width%,%height%
     return position
 }
 
 CreateLeftPosition(monitor) {
-    global _padding
-
-    fullWidth := GetWidth(monitor)
-    fullHeight := GetHeight(monitor)
-
-    width := Floor(fullWidth / 2 - (_padding * 2))
-    height := Floor(fullHeight - (_padding * 2))
-
-    left := Floor(GetLeft(monitor) + _padding)
-    top := Floor(GetTop(monitor) + _padding)
-
+    width := HalfWidth(monitor)
+    height := FullHeight(monitor)
+    left := Left(monitor)
+    top := Top(monitor)
     position = %left%,%top%,%width%,%height%
     return position    
 }
 
 CreateTopPosition(monitor) {
-    global _padding
-
-    fullWidth := GetWidth(monitor)
-    fullHeight := GetHeight(monitor)
-
-    width := Floor(fullWidth - (_padding * 2))
-    height := Floor(fullHeight / 2 - (_padding * 2))
-
-    left := Floor(GetLeft(monitor) + _padding)
-    top := Floor(GetTop(monitor) + _padding)
-
+    width := FullWidth(monitor)
+    height := HalfHeight(monitor)
+    left := Left(monitor)
+    top := Top(monitor)
     position = %left%,%top%,%width%,%height%
     return position    
 }
 
 CreateRightPosition(monitor) {
-    global _padding
-
-    fullWidth := GetWidth(monitor)
-    fullHeight := GetHeight(monitor)
-
-    width := Floor(fullWidth / 2 - (_padding * 2))
-    height := Floor(fullHeight - (_padding * 2))
-
-    left := Floor(GetLeft(monitor) + (fullWidth / 2) + _padding)
-    top := Floor(GetTop(monitor) + _padding)
-
+    width := HalfWidth(monitor)
+    height := FullHeight(monitor)
+    left := Right(monitor)
+    top := Top(monitor)
     position = %left%,%top%,%width%,%height%
     return position    
 }
 
 CreateBottomPosition(monitor) {
-    global _padding
-
-    fullWidth := GetWidth(monitor)
-    fullHeight := GetHeight(monitor)
-
-    width := Floor(fullWidth - (_padding * 2))
-    height := Floor(fullHeight / 2 - (_padding * 2))
-
-    left := Floor(GetLeft(monitor) + _padding)
-    top := Floor(GetTop(monitor) + (fullHeight / 2) + _padding)
-
+    width := FullWidth(monitor)
+    height := HalfHeight(monitor)
+    left := Left(monitor)
+    top := Bottom(monitor)
     position = %left%,%top%,%width%,%height%
     return position    
 }
 
 CreateTopLeftPosition(monitor) {
-    global _padding
-
-    fullWidth := GetWidth(monitor)
-    fullHeight := GetHeight(monitor)
-
-    width := Floor(fullWidth / 2 - (_padding * 2))
-    height := Floor(fullHeight / 2 - (_padding * 2))
-
-    left := Floor(GetLeft(monitor) + _padding)
-    top := Floor(GetTop(monitor) + _padding)
-
+    width := HalfWidth(monitor)
+    height := HalfHeight(monitor)
+    left := Left(monitor)
+    top := Top(monitor)
     position = %left%,%top%,%width%,%height%
     return position
 }
 
 CreateTopRightPosition(monitor) {
-    global _padding
-
-    fullWidth := GetWidth(monitor)
-    fullHeight := GetHeight(monitor)
-
-    width := Floor(fullWidth / 2 - (_padding * 2))
-    height := Floor(fullHeight / 2 - (_padding * 2))
-
-    left := Floor(GetLeft(monitor) + (fullWidth / 2) + _padding)
-    top := Floor(GetTop(monitor) + _padding)
-
+    width := HalfWidth(monitor)
+    height := HalfHeight(monitor)
+    left := Right(monitor)
+    top := Top(monitor)
     position = %left%,%top%,%width%,%height%
     return position
 }
 
 CreateBottomRightPosition(monitor) {
-    global _padding
-
-    fullWidth := GetWidth(monitor)
-    fullHeight := GetHeight(monitor)
-        
-    width := Floor(fullWidth / 2 - (_padding * 2))
-    height := Floor(fullHeight / 2 - (_padding * 2))
-
-    left := Floor(GetLeft(monitor) + (fullWidth / 2) + _padding)
-    top := Floor(GetTop(monitor) + (fullHeight / 2) + _padding)
-
+    width := HalfWidth(monitor)
+    height := HalfHeight(monitor)
+    left := Right(monitor)
+    top := Bottom(monitor)
     position = %left%,%top%,%width%,%height%
     return position
 }
 
 CreateBottomLeftPosition(monitor) {
-    global _padding
-
-    fullWidth := GetWidth(monitor)
-    fullHeight := GetHeight(monitor)
-        
-    width := Floor(fullWidth / 2 - (_padding * 2))
-    height := Floor(fullHeight / 2 - (_padding * 2))
-
-    left := Floor(GetLeft(monitor) + _padding)
-    top := Floor(GetTop(monitor) + (fullHeight / 2) + _padding)
-
+    width := HalfWidth(monitor)
+    height := HalfHeight(monitor)
+    left := Left(monitor)
+    top := Bottom(monitor)
     position = %left%,%top%,%width%,%height%
     return position
+}
+
+
+FullWidth(monitor) {
+    global _paddingLeft, _paddingRight
+    width := GetWidth(monitor)
+    return Floor(width - _paddingLeft - _paddingRight)
+}
+
+HalfWidth(monitor) {
+    global _paddingLeft, _paddingRight
+    width := GetWidth(monitor)
+    return Floor((width / 2) - _paddingLeft - _paddingRight)
+}
+
+FullHeight(monitor) {
+    global _paddingTop, _paddingBottom
+    height := GetHeight(monitor)
+    return Floor(height - _paddingTop - _paddingBottom)
+}
+
+HalfHeight(monitor) {
+    global _paddingTop, _paddingBottom
+    height := GetHeight(monitor)
+    return Floor((height / 2) - _paddingTop - _paddingBottom)
+}
+
+Top(monitor) {
+    global _paddingTop
+    top := GetTop(monitor)
+    return Floor(top + _paddingTop)
+}
+
+Bottom(monitor) {
+    global _paddingTop
+    height := GetHeight(monitor)
+    top := GetTop(monitor)
+    return Floor(top + (height / 2) + _paddingTop)
+}
+
+Left(monitor) {
+    global _paddingLeft
+    left := GetLeft(monitor)
+    return Floor(left + _paddingLeft)
+}
+
+Right(monitor) {
+    global _paddingLeft
+    width := GetWidth(monitor)
+    left := GetLeft(monitor)
+    return Floor(left + (width / 2) + _paddingLeft)
 }
 
 StoreUndoLocation() {
